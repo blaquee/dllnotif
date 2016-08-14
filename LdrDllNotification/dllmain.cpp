@@ -31,7 +31,6 @@ BOOL GetNtFunctions()
 void CALLBACK MyDllNotification(ULONG Reason, PLDR_DLL_NOTIFICATION_DATA NotificationData,
 	PVOID Context)
 {
-	//WCHAR DllName[256];
 	//Check for the reason
 	switch (Reason)
 	{
@@ -41,22 +40,11 @@ void CALLBACK MyDllNotification(ULONG Reason, PLDR_DLL_NOTIFICATION_DATA Notific
 	//LDR_DLL_NOTIFICATION_REASON_UNLOADED
 	case LDR_DLL_NOTIFICATION_REASON_UNLOADED:
 	{
-		
-		/* A Dll has been unloaded from memory, grab the unloaded strcture information
-		PLDR_DLL_UNLOADED_NOTIFICATION_DATA UnloadedData = (PLDR_DLL_UNLOADED_NOTIFICATION_DATA)malloc(sizeof(LDR_DLL_UNLOADED_NOTIFICATION_DATA));
-		memset(UnloadedData, 0, sizeof(LDR_DLL_UNLOADED_NOTIFICATION_DATA));
-		RtlCopyMemory(&UnloadedData, &NotificationData->Unloaded, sizeof(LDR_DLL_UNLOADED_NOTIFICATION_DATA));
-		*/
 
 		wchar_t message[256] = { 0 };
 		swprintf(message, L"DLL was unloaded event for %wZ\n", &NotificationData->Unloaded.FullDllName);
-		MessageBoxW(0, L"Event", message, MB_OK);
-		fprintf_s(fp, "Dll Unloaded Event triggered for: %wZ\n", &NotificationData->Unloaded.FullDllName);
-
-		//RtlCopyMemory(DllName, UnloadedData.FullDllName->Buffer, min(UnloadedData.FullDllName->Length, 256));
-		//Null terminate the string (UNSAFE)
-		//DllName[min(UnloadedData.FullDllName->Length, 256) + 1] = '\0';
-		
+		//MessageBoxW(0, message, L"Event", MB_OK);
+		fwprintf_s(fp, message);
 	}
 	default:
 		return;
@@ -77,7 +65,8 @@ BOOL Startup()
 			ret = LdrRegisterDllNotification(0, &MyDllNotification, NULL, &Cookie);
 			if (ret != STATUS_SUCCESS)
 				return FALSE;
-			return TRUE;
+			else
+				return TRUE;
 		}
 	}
 	return FALSE;

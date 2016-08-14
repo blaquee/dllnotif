@@ -15,15 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ntapi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
+    <ClCompile Include="Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
