@@ -42,7 +42,7 @@ void CALLBACK MyDllNotification(ULONG Reason, PLDR_DLL_NOTIFICATION_DATA Notific
 	{
 
 		wchar_t message[256] = { 0 };
-		swprintf(message, L"DLL was unloaded event for %wZ\n", &NotificationData->Unloaded.FullDllName);
+		swprintf(message, L"DLL was unloaded event for %wZ\n", (*NotificationData->Unloaded.FullDllName));
 		//MessageBoxW(0, message, L"Event", MB_OK);
 		fwprintf_s(fp, message);
 	}
