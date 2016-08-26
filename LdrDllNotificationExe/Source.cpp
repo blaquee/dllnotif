@@ -11,6 +11,7 @@ _LdrUnregisterDllNotification LdrUnregisterDllNotifcation = NULL;
 PVOID Cookie = NULL;
 FILE *fp = NULL;
 
+
 BOOL GetNtFunctions()
 {
     HMODULE hNtDll;
@@ -80,13 +81,17 @@ void Cleanup()
 
 int main(int argc, char** argv)
 {
+    wchar_t input;
     if(!Startup())
     {
         wprintf_s(L"Could not get the address LdrRegisterDllNOtifications\n");
         return 0;
     }
+    wprintf_s(L"Press 'q' to quit\n");
     while(1)
-    { }
+    {
+
+    }
 
 }
 
